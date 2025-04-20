@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-typedef  unsigned long long int64;
+typedef unsigned long long int64;
 
 class DateTime {
 private:
