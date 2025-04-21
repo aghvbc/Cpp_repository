@@ -44,12 +44,11 @@ protected:
 
 
 public:
-    Clock(int h = 0,int m = 0,int s = 0){
-        seconds = h * 3600 + m * 60 + s;
-    };
+    Clock(int h = 0, int m = 0, int s = 0): seconds{h * 3600 + m * 60 + s} {};
+
 
     void tick(){
-        seconds++;
+        ++seconds;
     };
 
     void print(){
@@ -75,7 +74,7 @@ public:
 
     void tick(){
         if (seconds > 0){
-            seconds --;
+            --seconds;
         }
         else{
             std::cout << "Done!" << std::endl;

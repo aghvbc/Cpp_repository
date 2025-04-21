@@ -40,9 +40,7 @@ class Clock{
 protected:
     int seconds;
 public:
-    Clock(int h = 0, int m = 0, int s = 0){
-        seconds = h * 3600 + m * 60 + s;
-    };
+    Clock(int h = 0, int m = 0, int s = 0): seconds{h * 3600 + m * 60 + s} {};
 
     void tick(){
         seconds++;

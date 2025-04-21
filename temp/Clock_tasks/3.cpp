@@ -43,9 +43,7 @@ class Clock{
 protected:
     int seconds;
 public:
-    Clock(){
-        seconds = 0;
-    };
+    Clock(): seconds{0} {};
 
     void tick(){
         seconds++;
@@ -69,11 +67,11 @@ public:
 
 class Stopwatch: public Clock{
 public:
-    Stopwatch(){
-        Clock();
-    }; 
+    Stopwatch(): Clock() {};
+    // Stopwatch(){
+    //     Clock();
+    // };
 
-    
     void stop(){
         printf("Total time: %02d:%02d:%02d\n", getH(), getM(), getS());
     };
