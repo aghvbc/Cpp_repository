@@ -2,7 +2,7 @@
 #include <fstream> //для считывания
 #include <vector>
 #include <sstream>
-#include "include/pms.hpp"
+#include "../include/Guest.hpp"
 
 std::vector<Guest> loadGuests(const std::string& filename) {
     std::vector<Guest> guests; //массив гостей
@@ -46,35 +46,52 @@ std::vector<Guest> loadGuests(const std::string& filename) {
         );
         guests.push_back(g);
 
-    }
+    };
+    return guests;
 }
 
 int main(){
     auto guests = loadGuests("guests.txt");
-    if (!guests.empty()) {
-        // //1. классический вариант с индексами
-        // for (int i = 0; i <guests.size(); i++){
-        //     guests[i].showInfo();
-        // };
 
-        //2. Вариант с элементами (через итератор)
+    if (!guests.empty()) {
         for (auto guest : guests) {
             guest.showInfo();
         }
-
-        // //3. через итератор
-        // for (auto iter = guests.begin(); iter != guests.end(); iter++){
-        //     iter->showInfo();
-        // }
     }
     else {
         std::cerr << "Файл не загрузился" << std::endl;
     }
+
+    GuestRegistry registry(guests);
+    // auto* guest1 = registry.getGuest(8);
+    // if (guest1) {
+    //     std::cout << "Найден гость с ID=8:\n";
+    //     guest1->showInfo();
+    // } else {
+    //     std::cout << "Гость с ID=8 не найден.\n";
+    // }
+
+    // 2. Добавляем нового гостя
+    Guest newGuest(
+        11, // id
+        "Тест", // firstName
+        "Пользователь", // secondName
+        "test@example.com", // email
+        "+79998887766", // phone
+        1231231231, // паспорт
+        "01.01.2000", // дата
+        10 // баллы
+    );
     
-    for (auto guest: guests) {
-        guest.showInfo();
-    };
+    registry.registerGuest(newGuest);
 
-
+    // 3. Получаем гостя по id и выводим инфу
+    Guest* guestPtr = registry.getGuest(11);
+    if (guestPtr != nullptr) {
+        std::cout << "\nИнформация о добавленном госте:\n";
+        guestPtr->showInfo();
+    } else {
+        std::cout << "Гость с таким ID не найден." << std::endl;
+    }
     return 0;
 }

@@ -2,6 +2,7 @@
 #pragma once
 #include <string>
 #include <cstdint>
+#include <vector>
 
 class Guest {
 private: //модификатор доступа
@@ -13,10 +14,13 @@ private: //модификатор доступа
     uint64_t passNumber;
     std::string date;
     uint loyaltyPoints;
+
 public:
     Guest(uint64_t id, std::string fName, std::string sName, std::string email, std::string PhoneNumber, uint64_t passNumber, std::string date, uint loyaltyPoints);
     //сеттеры
     void showInfo();
+    void addVisit();
+    void addLoyaltyPoints(int);
     //геттеры
     uint64_t getId();
     std::string getFirstName();
@@ -27,4 +31,15 @@ public:
     std::string getDate();
     uint64_t getLoyaltyPoints();
     
+    
+};
+
+class GuestRegistry {
+private:
+    std::vector<Guest> guests;
+public:
+    GuestRegistry(); // по умолчанию
+    GuestRegistry(const std::vector<Guest>& guests); // исправлено
+    int registerGuest(const Guest& guest);
+    Guest* getGuest(int id);
 };
